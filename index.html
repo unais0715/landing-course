@@ -446,7 +446,7 @@
     </footer>
 
     <!-- Contact Popup Overlay -->
-    <div class="popup-overlay" id="contactPopup">
+    <!-- <div class="popup-overlay" id="contactPopup">
         <div class="popup-content">
             <button class="popup-close" onclick="closePopup()">&times;</button>
             <h3 class="popup-title">🎉 Special Offer!</h3>
@@ -467,7 +467,61 @@
                 <button type="submit" class="popup-submit-btn">Claim Your Offer</button>
             </form>
         </div>
+    </div> -->
+
+    <!-- Contact Popup Overlay -->
+<div class="popup-overlay" id="contactPopup">
+    <div class="popup-content">
+        <button class="popup-close" onclick="closePopup()">&times;</button>
+        <h3 class="popup-title">Enrollment Form</h3>
+        <!-- <p class="popup-description">Get 20% off on your first course! Connect with us now to start your learning journey.</p> -->
+        
+        <form class="popup-form" id="popupForm" onsubmit="handlePopupFormSubmit(event)">
+            <div class="form-grid">
+                <div class="form-group">
+                    <label for="popup_name" class="form-label">Full Name</label>
+                    <input type="text" id="popup_name" name="popup_name" class="form-input" placeholder="Enter your full name" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="popup_email" class="form-label">Email Address</label>
+                    <input type="email" id="popup_email" name="popup_email" class="form-input" placeholder="your.email@example.com" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="popup_phone" class="form-label">Phone Number</label>
+                    <input type="tel" id="popup_phone" name="popup_phone" class="form-input" placeholder="+1 (555) 000-0000" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="popup_course" class="form-label">Interested Course</label>
+                    <select id="popup_course" name="popup_course" class="form-input" required>
+                        <option value="">Select a course</option>
+                        <option value="fullstack">Full Stack Web Development</option>
+                        <option value="datascience">Data Science & Analytics</option>
+                        <option value="cloud">Cloud Computing (AWS/Azure)</option>
+                        <option value="cybersecurity">Cybersecurity Essentials</option>
+                        <option value="uiux">UI/UX Design</option>
+                        <option value="mobile">Mobile App Development</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                
+                <!-- <div class="form-group full-width">
+                    <button type="submit" class="form-submit-btn">Claim Your Offer</button>
+                </div> -->
+                 <div class="form-group full-width">
+                            <label for="message" class="form-label ">Message</label>
+                            <textarea id="message" name="message" class="form-input" rows="4" placeholder="Tell us about your goals and questions..." required></textarea>
+                        </div>
+                         <div class="form-group full-width"><button type="submit" class="form-submit-btn">Send Message</button></div>
+            </div>
+        </form>
+    
     </div>
+</div>
+
+
 
     <!-- Success Message Toast -->
     <div class="toast" id="successToast">

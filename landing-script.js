@@ -1,7 +1,9 @@
 // ========================================
 // GLOBAL VARIABLES
 // ========================================
+let popupTimer = null;
 let popupShown = false;
+let closeTime = null;
 let currentPage = 1;
 const coursesPerPage = 6;
 let currentCategory = 'all';
@@ -428,11 +430,14 @@ function createCourseCard(course) {
             <span>📚 ${course.format}</span>
             <span>📊 ${course.difficulty}</span>
         </div>
-        <button class="course-btn" onclick="scrollToContact()">Enroll Now</button>
+      <button class="course-btn" onclick="openPopup()">Enroll Now</button>
+
     `;
     
     return card;
 }
+
+//   <button class="course-btn" onclick="scrollToContact()">Enroll Now</button>
 
 // ========================================
 // RENDER PAGINATION
@@ -713,7 +718,57 @@ function handleFormSubmit(event) {
 // ========================================
 // POPUP FORM SUBMISSION
 // ========================================
-function handlePopupSubmit(event) {
+function showPopup() {
+    const popup = document.getElementById('contactPopup');
+    popup.classList.add('show');
+    popupShown = true;
+    console.log('Popup shown at:', new Date().toLocaleTimeString());
+}
+
+function closePopup() {
+    const popup = document.getElementById('contactPopup');
+    popup.classList.remove('show');
+    
+    // Record when popup was closed
+    closeTime = Date.now();
+    console.log('Popup closed at:', new Date(closeTime).toLocaleTimeString());
+    
+    // Clear any existing timer
+    if (popupTimer) {
+        clearTimeout(popupTimer);
+    }
+    
+    // Schedule popup to show again after 10 seconds
+    popupTimer = setTimeout(function() {
+        if (!popup.classList.contains('show')) {
+            showPopup();
+        }
+    }, 10000); // 10 seconds
+    
+    console.log('Popup will show again in 10 seconds');
+}
+
+// ========================================
+// INITIAL POPUP SETUP
+// ========================================
+function initPopup() {
+    // Clear any existing timer first
+    if (popupTimer) {
+        clearTimeout(popupTimer);
+    }
+    
+    // Show popup after 10 seconds on initial load
+    popupTimer = setTimeout(function() {
+        showPopup();
+    }, 10000); // 10 seconds
+    
+    console.log('Initial popup scheduled in 10 seconds');
+}
+
+// ========================================
+// POPUP FORM SUBMISSION
+// ========================================
+function handlePopupFormSubmit(event) {
     event.preventDefault();
     
     const form = event.target;
@@ -728,36 +783,27 @@ function handlePopupSubmit(event) {
     console.log('Popup Form Submitted:', data);
     
     // Show success toast
-    showToast();
+    showToast('🎉 Offer claimed successfully! We will contact you shortly.');
     
     // Close popup
     closePopup();
+    
+    // Don't show popup again after successful submission
+    if (popupTimer) {
+        clearTimeout(popupTimer);
+        popupTimer = null;
+        console.log('Popup cancelled after successful form submission');
+    }
     
     // Reset form
     form.reset();
 }
 
 // ========================================
-// POPUP MANAGEMENT
+// EVENT LISTENERS
 // ========================================
-function showPopup() {
-    if (!popupShown) {
-        const popup = document.getElementById('contactPopup');
-        popup.classList.add('show');
-        popupShown = true;
-        
-        // Store in localStorage to prevent showing again
-        localStorage.setItem('popupShown', 'true');
-    }
-}
-
-function closePopup() {
-    const popup = document.getElementById('contactPopup');
-    popup.classList.remove('show');
-}
-
 // Close popup when clicking outside
-window.addEventListener('click', function(event) {
+document.addEventListener('click', function(event) {
     const popup = document.getElementById('contactPopup');
     if (event.target === popup) {
         closePopup();
@@ -765,23 +811,38 @@ window.addEventListener('click', function(event) {
 });
 
 // Close popup with Escape key
-window.addEventListener('keydown', function(event) {
+document.addEventListener('keydown', function(event) {
     if (event.key === 'Escape') {
         closePopup();
     }
 });
 
-// Show popup after 10 seconds (only once per session)
-window.addEventListener('load', function() {
-    // Check if popup was already shown
-    const hasShownPopup = localStorage.getItem('popupShown');
-    
-    if (!hasShownPopup) {
-        setTimeout(function() {
-            showPopup();
-        }, 10000); // 10 seconds
-    }
+// Initialize popup when page loads
+window.addEventListener('DOMContentLoaded', function() {
+    initPopup();
 });
+
+// ========================================
+// MANUAL TEST FUNCTION (Optional)
+// ========================================
+function testPopup() {
+    // Clear any existing timer
+    if (popupTimer) {
+        clearTimeout(popupTimer);
+    }
+    
+    // Show popup immediately for testing
+    showPopup();
+}
+
+function cancelPopup() {
+    // Clear any existing timer
+    if (popupTimer) {
+        clearTimeout(popupTimer);
+        popupTimer = null;
+        console.log('Popup timer cancelled');
+    }
+}
 
 // ========================================
 // TOAST NOTIFICATION
@@ -842,4 +903,18 @@ document.addEventListener('DOMContentLoaded', function() {
 // ========================================
 if (window.history.replaceState) {
     window.history.replaceState(null, null, window.location.href);
+}
+
+document.getElementById('coursesGrid').addEventListener('click', function() {
+    document.getElementById('contactPopup').style.display = 'flex';
+});
+
+function closePopup() {
+    document.getElementById('contactPopup').style.display = 'none';
+}
+
+function openPopup() {
+    const popup = document.getElementById("contactPopup");
+    popup.classList.add("active");
+    document.body.classList.add("popup-open"); // stop background scroll
 }
