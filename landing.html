@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Connect with industry experts for job-oriented certification courses. Upskill with live online training, earn certifications, and join a thriving community.">
+    <meta name="keywords" content="online education, certification courses, IT training, career development, upskilling, live online classes">
+    <meta name="author" content="EduConnect Platform">
+    <meta property="og:title" content="EduConnect - Expert-Led Certification Courses">
+    <meta property="og:description" content="Transform your career with industry-led certification courses and live online training.">
+    <meta property="og:type" content="website">
+    <title>EduConnect - Expert-Led Online Certification Courses | Upskill Your Career</title>
+    <link rel="stylesheet" href="./landing-styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Glass-morphism Header -->
+    <header class="header" id="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <span class="logo-icon">🎓</span>
+                    <span class="logo-text">EduConnect</span>
+                </div>
+                <nav class="nav" id="nav">
+                    <a href="#home" class="nav-link">Home</a>
+                    <a href="#features" class="nav-link">Features</a>
+                    <a href="#courses" class="nav-link">Courses</a>
+                    <a href="#how-it-works" class="nav-link">How It Works</a>
+                    <a href="#testimonials" class="nav-link">Testimonials</a>
+                    <a href="#faq" class="nav-link">FAQ</a>
+                    <a href="#contact" class="nav-link">Contact</a>
+                </nav>
+                <button class="cta-button" onclick="scrollToContact()">Get Started</button>
+                <button class="mobile-menu-toggle" id="mobileMenuToggle" onclick="toggleMobileMenu()">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-background"></div>
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title animate-fade-up">Transform Your Career with <span class="highlight">Expert-Led</span> Certification Courses</h1>
+                <p class="hero-description animate-fade-up">Connect with industry professionals. Master job-oriented skills. Earn recognized certifications. Join a thriving community of learners.</p>
+                <div class="hero-buttons animate-fade-up">
+                    <button class="btn-primary" onclick="scrollToContact()">Start Learning Today</button>
+                    <button class="btn-secondary" onclick="scrollToSection('courses')">Browse Courses</button>
+                </div>
+                <div class="hero-stats animate-fade-up">
+                    <div class="stat-item">
+                        <div class="stat-number">10,000+</div>
+                        <div class="stat-label">Students Trained</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">50+</div>
+                        <div class="stat-label">Expert Trainers</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">100+</div>
+                        <div class="stat-label">Certification Courses</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+     <!-- Courses Section -->
+    <section class="courses" id="courses">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Popular Certification Courses</h2>
+                <p class="section-description">Explore our most in-demand programs</p>
+            </div>
+            
+            <!-- Course Filter and Search -->
+            <div class="courses-controls">
+                <!-- Search Input -->
+                <div class="search-container">
+                    <div class="search-wrapper">
+                        <span class="search-icon">🔍</span>
+                        <input type="text" 
+                               id="courseSearch" 
+                               class="search-input" 
+                               placeholder="Search courses (e.g., 'Web Development', 'Data Science')"
+                               oninput="filterCourses()">
+                        <div class="autocomplete-dropdown" id="autocompleteDropdown"></div>
+                    </div>
+                </div>
+                
+                <!-- Filter Buttons -->
+                <div class="filter-buttons">
+                    <button class="filter-btn active" data-category="all" onclick="filterByCategory('all')">All Courses</button>
+                    <button class="filter-btn" data-category="development" onclick="filterByCategory('development')">Development</button>
+                    <button class="filter-btn" data-category="data-science" onclick="filterByCategory('data-science')">Data Science</button>
+                    <button class="filter-btn" data-category="cloud" onclick="filterByCategory('cloud')">Cloud & DevOps</button>
+                    <button class="filter-btn" data-category="security" onclick="filterByCategory('security')">Security</button>
+                    <button class="filter-btn" data-category="design" onclick="filterByCategory('design')">Design</button>
+                    <button class="filter-btn" data-category="business" onclick="filterByCategory('business')">Business</button>
+                </div>
+            </div>
+            
+            <!-- Courses Grid -->
+            <div class="courses-grid" id="coursesGrid">
+                <!-- Courses will be loaded here by JavaScript -->
+            </div>
+            
+            <!-- Pagination -->
+            <div class="pagination" id="pagination">
+                <!-- Pagination will be generated by JavaScript -->
+            </div>
+            
+            <!-- No Results Message -->
+            <div class="no-results" id="noResults" style="display: none;">
+                <div class="no-results-icon">🔍</div>
+                <h3 class="no-results-title">No courses found</h3>
+                <p class="no-results-description">Try adjusting your search or filter to find what you're looking for.</p>
+                <button class="no-results-btn" onclick="resetFilters()">Reset Filters</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Why Choose EduConnect?</h2>
+                <p class="section-description">Your pathway to career transformation starts here</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">👨‍🏫</div>
+                    <h3 class="feature-title">Industry Experts</h3>
+                    <p class="feature-description">Learn directly from professionals actively working in the industry with real-world experience.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎥</div>
+                    <h3 class="feature-title">Live Online Classes</h3>
+                    <p class="feature-description">Interactive live sessions with Q&A, hands-on projects, and personalized guidance.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📜</div>
+                    <h3 class="feature-title">Recognized Certifications</h3>
+                    <p class="feature-description">Earn industry-recognized certificates that boost your resume and credibility.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🤝</div>
+                    <h3 class="feature-title">Community Support</h3>
+                    <p class="feature-description">Join a vibrant community for networking, mentorship, and career guidance.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⏰</div>
+                    <h3 class="feature-title">Flexible Schedule</h3>
+                    <p class="feature-description">Learn at your own pace with evening and weekend batches for working professionals.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💼</div>
+                    <h3 class="feature-title">Career Guidance</h3>
+                    <p class="feature-description">Get resume reviews, interview prep, and job search strategies from mentors.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="how-it-works" id="how-it-works">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">How It Works</h2>
+                <p class="section-description">Your journey to success in 4 simple steps</p>
+            </div>
+            <div class="steps-container">
+                <div class="step-item">
+                    <div class="step-number">01</div>
+                    <div class="step-content">
+                        <h3 class="step-title">Choose Your Course</h3>
+                        <p class="step-description">Browse our catalog of job-oriented certification courses across IT, business, and emerging technologies.</p>
+                    </div>
+                </div>
+                <div class="step-item">
+                    <div class="step-number">02</div>
+                    <div class="step-content">
+                        <h3 class="step-title">Enroll & Connect</h3>
+                        <p class="step-description">Register for your chosen course and get matched with expert trainers in your field.</p>
+                    </div>
+                </div>
+                <div class="step-item">
+                    <div class="step-number">03</div>
+                    <div class="step-content">
+                        <h3 class="step-title">Learn Live Online</h3>
+                        <p class="step-description">Attend interactive live classes, complete hands-on projects, and get personalized feedback.</p>
+                    </div>
+                </div>
+                <div class="step-item">
+                    <div class="step-number">04</div>
+                    <div class="step-content">
+                        <h3 class="step-title">Earn & Advance</h3>
+                        <p class="step-description">Receive your certification, join our community, and leverage our network to advance your career.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+   
+
+    <!-- Testimonials Section -->
+    <section class="testimonials" id="testimonials">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Success Stories</h2>
+                <p class="section-description">Hear from our graduates who transformed their careers</p>
+            </div>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-rating">⭐⭐⭐⭐⭐</div>
+                    <p class="testimonial-text">"EduConnect transformed my career! The live sessions with industry experts gave me practical skills that helped me switch from a non-tech background to a full-stack developer role."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">S</div>
+                        <div>
+                            <div class="author-name">Priya Sharma</div>
+                            <div class="author-role">Full Stack Developer</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-rating">⭐⭐⭐⭐⭐</div>
+                    <p class="testimonial-text">"The AWS certification course was excellent. The hands-on projects and expert guidance helped me become a certified cloud architect. Highly recommended for working professionals!"</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">R</div>
+                        <div>
+                            <div class="author-name">Rahul Verma</div>
+                            <div class="author-role">Cloud Architect</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-rating">⭐⭐⭐⭐⭐</div>
+                    <p class="testimonial-text">"I upskilled with the Data Science program while working full-time. The flexible schedule and supportive community made it possible. Now I'm working as a data analyst!"</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">A</div>
+                        <div>
+                            <div class="author-name">Ananya Patel</div>
+                            <div class="author-role">Data Analyst</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq" id="faq">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Frequently Asked Questions</h2>
+                <p class="section-description">Everything you need to know about our programs</p>
+            </div>
+            <div class="faq-container">
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFAQ(this)">
+                        <span>Do you provide job placement after certification?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>We don't guarantee job placements, but we provide comprehensive career support including resume reviews, interview preparation, job search strategies, and networking opportunities through our community. We equip you with skills and guidance to improve your chances in the job market.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFAQ(this)">
+                        <span>Are the classes live or pre-recorded?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>All our classes are conducted live online with industry professionals. This allows for real-time interaction, Q&A sessions, and personalized feedback. Recordings are also provided for your reference.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFAQ(this)">
+                        <span>Who are the trainers?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Our trainers are industry professionals and freelance experts actively working in their respective fields. They bring real-world experience and practical insights to every session.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFAQ(this)">
+                        <span>Can I learn while working full-time?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Absolutely! We offer flexible schedules with evening and weekend batches specifically designed for working professionals. You can learn at your own pace without disrupting your current job.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFAQ(this)">
+                        <span>What kind of certification do I receive?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>You'll receive a course completion certificate upon successfully finishing your program. Many of our courses also prepare you for industry-recognized certifications from providers like AWS, Microsoft, Google, etc.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFAQ(this)">
+                        <span>Is there community support after course completion?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Yes! You'll gain lifetime access to our community of learners, alumni, and mentors. This network provides ongoing support, networking opportunities, and career guidance even after you complete your course.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Get In Touch</h2>
+                <p class="section-description">Ready to start your learning journey? Contact us today!</p>
+            </div>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <h3 class="contact-info-title">Let's Talk</h3>
+                    <p class="contact-info-text">Have questions about our courses? Our team is here to help you choose the right program for your career goals.</p>
+                    <div class="contact-details">
+                        <div class="contact-detail-item">
+                            <span class="contact-icon">📧</span>
+                            <div>
+                                <div class="contact-detail-label">Email</div>
+                                <div class="contact-detail-value">info@educonnect.com</div>
+                            </div>
+                        </div>
+                        <div class="contact-detail-item">
+                            <span class="contact-icon">📞</span>
+                            <div>
+                                <div class="contact-detail-label">Phone</div>
+                                <div class="contact-detail-value">+1 (555) 123-4567</div>
+                            </div>
+                        </div>
+                        <div class="contact-detail-item">
+                            <span class="contact-icon">⏰</span>
+                            <div>
+                                <div class="contact-detail-label">Support Hours</div>
+                                <div class="contact-detail-value">Mon-Sat: 9AM - 7PM</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-form-wrapper">
+                    <form class="contact-form" id="contactForm" onsubmit="handleFormSubmit(event)">
+                        <div class="form-group">
+                            <label for="name" class="form-label">Full Name</label>
+                            <input type="text" id="name" name="name" class="form-input" placeholder="Enter your full name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email" class="form-label">Email Address</label>
+                            <input type="email" id="email" name="email" class="form-input" placeholder="your.email@example.com" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone" class="form-label">Phone Number</label>
+                            <input type="tel" id="phone" name="phone" class="form-input" placeholder="+1 (555) 000-0000" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="course" class="form-label">Interested Course</label>
+                            <select id="course" name="course" class="form-input" required>
+                                <option value="">Select a course</option>
+                                <option value="fullstack">Full Stack Web Development</option>
+                                <option value="datascience">Data Science & Analytics</option>
+                                <option value="cloud">Cloud Computing (AWS/Azure)</option>
+                                <option value="cybersecurity">Cybersecurity Essentials</option>
+                                <option value="uiux">UI/UX Design</option>
+                                <option value="mobile">Mobile App Development</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="message" class="form-label">Message</label>
+                            <textarea id="message" name="message" class="form-input" rows="4" placeholder="Tell us about your goals and questions..." required></textarea>
+                        </div>
+                        <button type="submit" class="form-submit-btn">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <span class="logo-icon">🎓</span>
+                        <span class="logo-text">EduConnect</span>
+                    </div>
+                    <p class="footer-description">Empowering learners worldwide with expert-led certification courses and career transformation programs.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link" aria-label="Facebook">f</a>
+                        <a href="#" class="social-link" aria-label="Twitter">𝕏</a>
+                        <a href="#" class="social-link" aria-label="LinkedIn">in</a>
+                        <a href="#" class="social-link" aria-label="Instagram">📷</a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4 class="footer-title">Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#courses">Courses</a></li>
+                        <li><a href="#testimonials">Testimonials</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4 class="footer-title">Programs</h4>
+                    <ul class="footer-links">
+                        <li><a href="#courses">Web Development</a></li>
+                        <li><a href="#courses">Data Science</a></li>
+                        <li><a href="#courses">Cloud Computing</a></li>
+                        <li><a href="#courses">Cybersecurity</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4 class="footer-title">Support</h4>
+                    <ul class="footer-links">
+                        <li><a href="#faq">FAQ</a></li>
+                        <li><a href="#contact">Contact Us</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 EduConnect. All rights reserved. Built with passion for education.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Contact Popup Overlay -->
+    <div class="popup-overlay" id="contactPopup">
+        <div class="popup-content">
+            <button class="popup-close" onclick="closePopup()">&times;</button>
+            <h3 class="popup-title">🎉 Special Offer!</h3>
+            <p class="popup-description">Get 20% off on your first course! Connect with us now to start your learning journey.</p>
+            <form class="popup-form" id="popupForm" onsubmit="handlePopupSubmit(event)">
+                <input type="text" name="popup_name" class="popup-input" placeholder="Your Name" required>
+                <input type="email" name="popup_email" class="popup-input" placeholder="Your Email" required>
+                <input type="tel" name="popup_phone" class="popup-input" placeholder="Phone Number" required>
+                <select name="popup_course" class="popup-input" required>
+                    <option value="">Select Your Interest</option>
+                    <option value="fullstack">Full Stack Web Development</option>
+                    <option value="datascience">Data Science & Analytics</option>
+                    <option value="cloud">Cloud Computing</option>
+                    <option value="cybersecurity">Cybersecurity</option>
+                    <option value="uiux">UI/UX Design</option>
+                    <option value="mobile">Mobile App Development</option>
+                </select>
+                <button type="submit" class="popup-submit-btn">Claim Your Offer</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Success Message Toast -->
+    <div class="toast" id="successToast">
+        <span class="toast-icon">✓</span>
+        <span class="toast-message">Message sent successfully! We'll contact you soon.</span>
+    </div>
+
+    <script src="./landing-script.js"></script>
+</body>
+</html>
